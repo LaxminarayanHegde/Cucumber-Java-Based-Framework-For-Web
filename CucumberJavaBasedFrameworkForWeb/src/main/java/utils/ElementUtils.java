@@ -1,0 +1,30 @@
+package utils;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ElementUtils {
+	
+	public WebElement waitForVisisbleElement(By element, WebDriver driver, int timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+		return wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+	}
+	
+	public void clickElement(By element, WebDriver driver, int timeout) {
+		waitForVisisbleElement(element, driver, timeout).click();
+	}
+	
+	public String getTextFromElement(By element, WebDriver driver, int timeout) {
+		return waitForVisisbleElement(element, driver, timeout).getText();
+	}
+	
+	public void enterTextOnInputTextField(By element, WebDriver driver, int timeout, String input) {
+		waitForVisisbleElement(element, driver, timeout).sendKeys(input);
+	}
+
+}

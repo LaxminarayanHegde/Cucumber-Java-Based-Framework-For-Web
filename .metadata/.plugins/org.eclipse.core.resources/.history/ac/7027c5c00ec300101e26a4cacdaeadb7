@@ -1,0 +1,37 @@
+package pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import utils.ElementUtils;
+
+public class HomePage extends ElementUtils{
+	
+	WebDriver driver;
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	private By searchProductInputTextBox = By.xpath("//input[@type='search']");
+	private By searchButton = By.cssSelector("button.search-button");
+	private By nameOfProductOnCard = By.xpath("//h4[contains(text(),'Tom')]");
+	private By topDealsButton = By.linkText("Top Deals");
+	
+	public void enterTextOnSearchProductInputTextBox(String productName) {
+		enterTextOnInputTextField(searchProductInputTextBox, driver, 10, productName);
+	}
+	
+	public void clickSearchButton() {
+		clickElement(searchButton, driver, 10);
+	}
+	
+	public String getNameOfProuctOnTheProductCard() {
+		return getTextFromElement(nameOfProductOnCard, driver, 10);
+	}
+	
+	public void clickTopDealsButton() {
+		clickElement(topDealsButton, driver, 10);
+	}
+
+}

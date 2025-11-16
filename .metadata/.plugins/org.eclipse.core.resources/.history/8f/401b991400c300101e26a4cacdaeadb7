@@ -1,0 +1,5 @@
+
+Feature: Search and place order for products
+
+	Scenario: Verify search experience on home page and offers page
+		

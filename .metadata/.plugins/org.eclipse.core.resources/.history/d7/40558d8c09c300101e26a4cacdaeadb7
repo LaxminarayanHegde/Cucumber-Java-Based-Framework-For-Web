@@ -1,0 +1,28 @@
+package pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import utils.ElementUtils;
+
+public class HomePage extends ElementUtils{
+	
+	WebDriver driver;
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	private By searchProductInputTextBox = By.xpath("//input[@type='search']");
+	private By searchButton = By.cssSelector("button.search-button");
+	private By nameOfProductOnCard = By.cssSelector("h4.product-name");
+	
+	public void enterTextOnSearchProductInputTextBox(String productName) {
+		ElementUtils.enterTextOnInputTextField(searchProductInputTextBox, driver, 10, productName)
+	}
+	
+	public void clickSearchButton() {
+		driver.findElement(searchButton).click();
+	}
+
+}
