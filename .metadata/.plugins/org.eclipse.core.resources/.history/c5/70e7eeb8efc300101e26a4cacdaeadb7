@@ -1,0 +1,31 @@
+package stepDefinitions;
+
+import org.testng.Assert;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import pageObjects.LandingPage;
+import utils.TestContextSetup;
+
+public class LandingPageStepDef {
+	
+	TestContextSetup testContextSetup;
+	
+	public LandingPageStepDef(TestContextSetup testContextSetup) {
+		this.testContextSetup = testContextSetup;
+	}
+	
+	@Given("user on the GreenKart landing page")
+	public void user_on_the_green_kart_landing_page() {
+		testContextSetup.baseTest.webDdriverManager();
+	}
+
+	@When("user searches with shortname {string} and extracts the name of the product")
+	public void user_searches_with_shortname_and_extracts_the_name_of_the_product(String productShortName) {
+		testContextSetup.productShortName = productShortName;
+		LandingPage landingPage = testContextSetup.pageObjectManager.getLandingPage();
+		landingPage.enterTextOnSearchProductInputTextBox(productShortName);
+		landingPage.clickSearchButton();
+		testContextSetup.productNameOnHomePage = landingPage.getNameOfProuctOnTheProductCard().split("-")[0].trim();
+		Assert.assertTrue(testContextSetup.productNameOnHomePage.contains(productShortName));
+	}
+}

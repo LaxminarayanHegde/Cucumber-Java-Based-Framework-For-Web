@@ -1,0 +1,27 @@
+package utils;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class BaseTest {
+	
+	public WebDriver driver;
+	
+	public WebDriver webDdriverManager() throws IOException {
+		FileInputStream fis = new FileInputStream(System.getenv("user.directory")+"/CucumberJavaBasedFrameworkForWeb/CucumberJavaBasedFrameworkForWeb/config.properties");
+		Properties prop = new Properties();
+		prop.load(fis);
+		if(driver == null) {
+			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.get("https://rahulshettyacademy.com/seleniumPractise");
+		}
+		
+		return driver;
+	}
+
+}

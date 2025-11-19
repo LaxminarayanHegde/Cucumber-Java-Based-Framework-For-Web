@@ -1,9 +1,0 @@
-package CucumberOptions;
-
-import io.cucumber.testng.CucumberOptions;
-
-@CucumberOptions()
-
-public class TestNGRunner {
-
-}

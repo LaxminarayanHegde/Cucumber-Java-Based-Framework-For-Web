@@ -1,0 +1,22 @@
+package stepDefinitions;
+
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
+
+import io.cucumber.java.After;
+import utils.TestContextSetup;
+
+public class Hooks {
+	
+	public WebDriver driver;
+	
+	public Hooks(TestContextSetup testContextSetup) throws IOException {
+		this.driver = testContextSetup.baseTest.webDriverManager();
+	}
+
+	@After
+	public void afterScenario() {
+		
+	}
+}

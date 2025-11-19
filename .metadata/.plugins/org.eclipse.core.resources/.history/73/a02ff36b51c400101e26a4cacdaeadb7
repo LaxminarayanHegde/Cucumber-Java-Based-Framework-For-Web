@@ -1,0 +1,13 @@
+package stepDefinitions;
+
+public class Hooks {
+	
+	public Hooks() {
+		
+	}
+
+	@After
+	public void afterScenario() {
+		
+	}
+}

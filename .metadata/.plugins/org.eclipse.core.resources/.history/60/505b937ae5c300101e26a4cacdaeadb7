@@ -1,0 +1,38 @@
+package stepDefinitions;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import pageObjects.LandingPage;
+import utils.TestContextSetup;
+
+public class LandingPageStepDef {
+	TestContextSetup testContextSetup;
+	WebDriver driver;
+	String productNameOnHomePage;
+	String productShortName;
+	
+	public LandingPageStepDef(TestContextSetup testContextSetup) {
+		this.testContextSetup = testContextSetup;
+	}
+	
+	@Given("user on the GreenKart landing page")
+	public void user_on_the_green_kart_landing_page() {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://rahulshettyacademy.com/seleniumPractise");
+	}
+
+	@When("user searches with shortname {string} and extracts the name of the product")
+	public void user_searches_with_shortname_and_extracts_the_name_of_the_product(String productShortName) {
+		this.productShortName = productShortName;
+		LandingPage homePage = new LandingPage(driver);
+		homePage.enterTextOnSearchProductInputTextBox(productShortName);
+		homePage.clickSearchButton();
+		productNameOnHomePage = homePage.getNameOfProuctOnTheProductCard().split("-")[0].trim();
+		Assert.assertTrue(productNameOnHomePage.contains(productShortName));
+	}
+}

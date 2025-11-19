@@ -1,7 +1,7 @@
-
+@searchProduct
 Feature: Search and place order for products
 
 	Scenario: Verify search experience on home page and offers page
 		Given user on the GreenKart landing page
 		When user searches with shortname "Tom" and extracts the name of the product
-		Then user searches same shortname on offers page to validate the same product exists or not
+		Then user searches same shortname on offers page to validate "Tomato" exists or not

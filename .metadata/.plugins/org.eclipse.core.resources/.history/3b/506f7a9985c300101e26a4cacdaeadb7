@@ -1,0 +1,48 @@
+package stepDefinitions;
+
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pageObjects.HomePage;
+import pageObjects.OffersPage;
+
+public class SearchProductStepDef {
+	
+	WebDriver driver;
+	
+	@Given("user on the GreenKart landing page")
+	public void user_on_the_green_kart_landing_page() {
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://rahulshettyacademy.com/seleniumPractise");
+	}
+
+	@When("user searches with shortname {string} and extracts the name of the product")
+	public void user_searches_with_shortname_and_extracts_the_name_of_the_product(String productShortName) {
+		HomePage homePage = new HomePage(driver);
+		homePage.enterTextOnSearchProductInputTextBox(productShortName);
+		homePage.clickSearchButton();
+		String productName = homePage.getNameOfProuctOnTheProductCard();
+		Assert.assertTrue(productName.contains(productShortName));
+	}
+
+	@Then("user searches same shortname on offers page to validate the same product exists or not")
+	public void user_searches_same_shortname_on_offers_page_to_validate_the_same_product_exists_or_not() {
+		OffersPage offersPage = new OffersPage(driver);
+		offersPage.clickTopDealsButton();
+		Set<String> tabs = driver.getWindowHandles();
+		Iterator iterator = tabs.iterator();
+		Object parentTab = iterator.next();
+		Object childTab = iterator.next();
+		driver.quit();
+	}
+
+
+}

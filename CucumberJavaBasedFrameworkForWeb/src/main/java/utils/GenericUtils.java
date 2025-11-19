@@ -1,0 +1,23 @@
+package utils;
+
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.WebDriver;
+
+public class GenericUtils {
+	public WebDriver driver;
+	
+	public GenericUtils(WebDriver driver) {
+		this.driver = driver;
+	}
+	
+	public void switchToChildWindow() {
+		Set<String> tabs = driver.getWindowHandles();
+		Iterator iterator = tabs.iterator();
+		String parentTab = (String) iterator.next();
+		String childTab = (String) iterator.next();
+		driver.switchTo().window(childTab);
+	}
+
+}
